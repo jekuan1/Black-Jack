@@ -48,7 +48,9 @@ let gameStarted = false,
   playerCards = [],
   dealerScore = 0,
   playerScore = 0,
-  deck = [];
+  deck = [],
+  wins = 0,
+  losses = 0;
 
 hitButton.style.display = "none";
 stayButton.style.display = "none";
@@ -356,7 +358,7 @@ function checkForEndOfGame() {
 
 function playerStand() {
   // STAND SCENARIO
-  if (dealerScore < playerScore) {
+  if (dealerScore <= playerScore) {
     // DEALER STANDS ALL 17s
     while (dealerScore < 17) {
       dealerHit();
@@ -402,9 +404,11 @@ function showStatus() {
   if (gameOver) {
     dealerReveal();
     if (winner === "player") {
+      wins++;
       gameStatus.innerText = "YOU WIN!";
       gameStatus.style.backgroundColor = "green";
     } else if (winner === "dealer") {
+      losses++;
       gameStatus.innerText = "DEALER WINS";
       gameStatus.style.backgroundColor = "red";
     } else {
